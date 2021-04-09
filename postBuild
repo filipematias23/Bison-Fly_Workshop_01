@@ -1,0 +1,3 @@
+set -ex
+
+Rscript -e 'library(devtools);devtools::install_github("filipematias23/FIELDimageR", dependencies=FALSE)'
