@@ -154,10 +154,10 @@ for(i in 2:length(MOSAIC)){
   EX1.RemSoil<-fieldMask(EX1.Rotate, plot = F)
   EX1.Indices<- fieldIndex(mosaic = EX1.RemSoil$newMosaic, 
                             Red = 1, Green = 2, Blue = 3, 
-                            index = c("NGRDI","BGI", "GLI","VARI"), 
-                            myIndex = c("(Red-Blue)/Green","2*Green/Blue"),
+                            index = c("NGRDI","BGI"), 
+                            myIndex = c("(Red-Blue)/Green"),
                             plot = F)
-  EX1.Info<- fieldInfo(mosaic = EX1.Indices[[c("NGRDI","BGI", "GLI","VARI","myIndex.1","myIndex.2")]],
+  EX1.Info<- fieldInfo(mosaic = EX1.Indices[[c("NGRDI","BGI","myIndex")]],
                         fieldShape = plotShape$fieldShape, 
                         n.core = 3)
   DSM0 <- stack(paste("./DSM/",DSM[1],sep = ""))
