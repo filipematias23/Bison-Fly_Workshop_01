@@ -154,10 +154,10 @@ for(i in 2:length(MOSAIC)){
   EX1.RemSoil<-fieldMask(EX1.Rotate, plot = F)
   EX1.Indices<- fieldIndex(mosaic = EX1.RemSoil$newMosaic, 
                             Red = 1, Green = 2, Blue = 3, 
-                            index = c("NGRDI","BGI"), 
-                            myIndex = c("(Red-Blue)/Green"),
+                            index = c("NGRDI"), # c("NGRDI","BGI", "GLI","VARI")
+                            myIndex = c("(Red-Blue)/Green"), # c("(Red-Blue)/Green","2*Green/Blue")
                             plot = F)
-  EX1.Info<- fieldInfo(mosaic = EX1.Indices[[c("NGRDI","BGI","myIndex")]],
+  EX1.Info<- fieldInfo(mosaic = EX1.Indices[[c("NGRDI","myIndex")]], # c("NGRDI","BGI", "GLI","VARI","myIndex.1","myIndex.2")
                         fieldShape = plotShape$fieldShape, 
                         n.core = 3)
   DSM0 <- stack(paste("./DSM/",DSM[1],sep = ""))
@@ -201,7 +201,6 @@ DataTotal$Row<-as.factor(as.character(DataTotal$Row))
 DataTotal$Column<-as.factor(as.character(DataTotal$Column))
 DataTotal$DAP<-as.numeric(as.character(DataTotal$DAP))
 DataTotal$NGRDI<-as.numeric(as.character(DataTotal$NGRDI))
-DataTotal$BGI<-as.numeric(as.character(DataTotal$BGI))
 DataTotal$EPH<-as.numeric(as.character(DataTotal$EPH))
 
 ggplot(DataTotal, aes(x = NGRDI,fill=as.factor(DAP))) +
