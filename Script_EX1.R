@@ -142,55 +142,56 @@ EPH$plotValue
 ### Evaluating all mosaics in a loop ###
 ########################################
 
-DataTotal<-NULL
-for(i in 2:length(MOSAIC)){
-  EX1 <- stack(paste("./MOSAIC/",MOSAIC[i],sep = ""))
-  EX1.Crop <- fieldCrop(mosaic = EX1,
-                    fieldShape = Test.Crop,
-                    plot = F)
-  EX1.Rotate<-fieldRotate(EX1.Crop,
-                    theta = 2.3,
-                    plot = F)
-  EX1.RemSoil<-fieldMask(EX1.Rotate, plot = F)
-  EX1.Indices<- fieldIndex(mosaic = EX1.RemSoil$newMosaic, 
-                            Red = 1, Green = 2, Blue = 3, 
-                            index = c("NGRDI"), # c("NGRDI","BGI", "GLI","VARI")
-                            myIndex = c("(Red-Blue)/Green"), # c("(Red-Blue)/Green","2*Green/Blue")
-                            plot = F)
-  EX1.Info<- fieldInfo(mosaic = EX1.Indices[[c("NGRDI","myIndex")]], # c("NGRDI","BGI", "GLI","VARI","myIndex.1","myIndex.2")
-                        fieldShape = plotShape$fieldShape, 
-                        n.core = 3)
-  DSM0 <- stack(paste("./DSM/",DSM[1],sep = ""))
-  DSM1 <- stack(paste("./DSM/",DSM[i],sep = ""))
-  DSM0.Crop <- fieldCrop(mosaic = DSM0,fieldShape = Test.Crop,plot = F)
-  DSM1.Crop <- fieldCrop(mosaic = DSM1,fieldShape = Test.Crop,plot = F)
-  DSM0.R <- resample(DSM0.Crop, DSM1.Crop)
-  CHM <- DSM1.Crop-DSM0.R
-  CHM.Rotate<-fieldRotate(CHM, theta = 2.3,plot = F)
-  CHM.RemSoil <- fieldMask(CHM.Rotate, mask = EX1.RemSoil$mask,plot = F)
-  EPH <- fieldInfo(CHM.RemSoil$newMosaic, 
-                   fieldShape = EX1.Info$fieldShape, 
-                   fun = "mean")
-  DataTotal<-rbind(DataTotal,
-                   data.frame(DAP=as.character(do.call(c,strsplit(MOSAIC[i],split = "_"))[2]),
-                              EPH$fieldShape@data))
-  # Making map plots
-  fieldPlot(fieldShape=EPH$fieldShape,
-            fieldAttribute="NGRDI", 
-            mosaic=EX1.Rotate, 
-            color=c("red","green"),
-            # min.lim = 0,
-            # max.lim = 0.35,
-            alpha = 0.5,
-            round = 2)
-  print(paste("### Completed: ", "Mosaic_",i," ###",sep=""))
-  }
+# DataTotal<-NULL
+# for(i in 2:length(MOSAIC)){
+#   EX1 <- stack(paste("./MOSAIC/",MOSAIC[i],sep = ""))
+#   EX1.Crop <- fieldCrop(mosaic = EX1,
+#                     fieldShape = Test.Crop,
+#                     plot = F)
+#   EX1.Rotate<-fieldRotate(EX1.Crop,
+#                     theta = 2.3,
+#                     plot = F)
+#   EX1.RemSoil<-fieldMask(EX1.Rotate, plot = F)
+#   EX1.Indices<- fieldIndex(mosaic = EX1.RemSoil$newMosaic, 
+#                             Red = 1, Green = 2, Blue = 3, 
+#                             index = c("NGRDI","BGI", "GLI","VARI"), 
+#                             myIndex = c("(Red-Blue)/Green","2*Green/Blue"),
+#                             plot = F)
+#   EX1.Info<- fieldInfo(mosaic = EX1.Indices[[c("NGRDI","BGI", "GLI","VARI","myIndex.1","myIndex.2")]],
+#                         fieldShape = plotShape$fieldShape, 
+#                         n.core = 3)
+#   DSM0 <- stack(paste("./DSM/",DSM[1],sep = ""))
+#   DSM1 <- stack(paste("./DSM/",DSM[i],sep = ""))
+#   DSM0.Crop <- fieldCrop(mosaic = DSM0,fieldShape = Test.Crop,plot = F)
+#   DSM1.Crop <- fieldCrop(mosaic = DSM1,fieldShape = Test.Crop,plot = F)
+#   DSM0.R <- resample(DSM0.Crop, DSM1.Crop)
+#   CHM <- DSM1.Crop-DSM0.R
+#   CHM.Rotate<-fieldRotate(CHM, theta = 2.3,plot = F)
+#   CHM.RemSoil <- fieldMask(CHM.Rotate, mask = EX1.RemSoil$mask,plot = F)
+#   EPH <- fieldInfo(CHM.RemSoil$newMosaic, 
+#                    fieldShape = EX1.Info$fieldShape, 
+#                    fun = "mean")
+#   DataTotal<-rbind(DataTotal,
+#                    data.frame(DAP=as.character(do.call(c,strsplit(MOSAIC[i],split = "_"))[2]),
+#                               EPH$fieldShape@data))
+#   # Making map plots
+#   fieldPlot(fieldShape=EPH$fieldShape,
+#             fieldAttribute="NGRDI", 
+#             mosaic=EX1.Rotate, 
+#             color=c("red","green"),
+#             # min.lim = 0,
+#             # max.lim = 0.35,
+#             alpha = 0.5,
+#             round = 2)
+#   print(paste("### Completed: ", "Mosaic_",i," ###",sep=""))
+#   }
+# 
+# colnames(DataTotal)<-c(colnames(DataTotal)[-c(dim(DataTotal)[2])],"EPH") # layer=EPH
+# DataTotal<-DataTotal[,!colnames(DataTotal)%in%c("ID","ID.1","PlotName")] # Removing column 12 ("ID.1")
+# write.csv(DataTotal,"DataTotal.csv",row.names = F,col.names = T)
 
-colnames(DataTotal)<-c(colnames(DataTotal)[-c(dim(DataTotal)[2])],"EPH") # layer=EPH
-DataTotal<-DataTotal[,!colnames(DataTotal)%in%c("ID","ID.1","PlotName")] # Removing column 12 ("ID.1")
+DataTotal<-read.csv("DataTotal.csv",header = T)
 DataTotal
-
-#write.csv(DataTotal,"DataTotal.csv",row.names = F,col.names = T)
 
 ################
 ### Graphics ###
@@ -201,6 +202,7 @@ DataTotal$Row<-as.factor(as.character(DataTotal$Row))
 DataTotal$Column<-as.factor(as.character(DataTotal$Column))
 DataTotal$DAP<-as.numeric(as.character(DataTotal$DAP))
 DataTotal$NGRDI<-as.numeric(as.character(DataTotal$NGRDI))
+DataTotal$BGI<-as.numeric(as.character(DataTotal$BGI))
 DataTotal$EPH<-as.numeric(as.character(DataTotal$EPH))
 
 ggplot(DataTotal, aes(x = NGRDI,fill=as.factor(DAP))) +
@@ -309,19 +311,6 @@ ggplot(DataTotal.Reg,aes(y=NGRDI, x=EPH)) +
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank()) 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+###########
+### END ###
+###########
