@@ -1,22 +1,22 @@
-# FIELDimageR Workshop Series - Example 09 : 
+# FIELDimageR Workshop Series - Example 11 : 
 
 <p align="center">
 <a href="https://github.com/OpenDroneMap/FIELDimageR"><img src="https://raw.githubusercontent.com/filipematias23/images/master/readme/FIELDimageR.jpg" width=60% height=60% title="Watch the video"></a>
 </p>
 
-## "FIELDimageR pipelines: Phenomics applied to plant breeding"
+## "FIELDimageR pipelines: Phenomics applied to Agriculture"
 
-> Workshop presented for GEMS-UFSSER. In this course, I went through the basic steps of FIELDimageR pipeline showing how to evaluate and apply remote sensing data and lab images in plant breeding. 
+> Workshop presented for NDSU Breeding Pipeline Database Managers. In this course, I went through the basic steps of FIELDimageR pipeline showing how to evaluate and apply remote sensing data and lab images in plant breeding. 
 
 <br />
 
 ## Hands-On:
 
-> Open Example 09 Tutorial: [https://filipematias23.github.io/FIELDimageR-Workshop-9/](https://filipematias23.github.io/FIELDimageR-Workshop-9/)
+> Open Example 09 Tutorial: [https://filipematias23.github.io/FIELDimageR-Workshop-11/](https://filipematias23.github.io/FIELDimageR-Workshop-11/)
 
 > Launch the Binder button below to open a virtual RStudio (running this tutorial online):
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/filipematias23/FIELDimageR-Workshop-9.git/master?urlpath=rstudio)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/filipematias23/FIELDimageR-Workshop-11.git/master?urlpath=rstudio)
 
 <br />
 
