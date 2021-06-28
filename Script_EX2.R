@@ -194,3 +194,6 @@ legend(list(x = 1600, y = (Trait_1.H2-0.03)),
          "SWIR-2 (2000-2400nm)"),
        col =c("black"), box.lty=0, cex = 0.8)
 
+###########
+### END ###
+###########
