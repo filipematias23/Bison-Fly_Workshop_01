@@ -81,8 +81,9 @@ Test.Indices<- fieldIndex(mosaic = Test.RemSoil$newMosaic,
 ############################
 
 Test.Info<- fieldInfo(mosaic = Test.Indices[[c("NGRDI","BGI", "GLI","VARI","myIndex.1","myIndex.2")]],
-                      fieldShape = plotShape$fieldShape, 
-                      n.core = 3)
+                      fieldShape = plotShape$fieldShape
+                      #,n.core = 3
+                     )
 Test.Info$fieldShape@data
 
 plot(Test.Indices$myIndex.2)
@@ -158,8 +159,9 @@ EPH$plotValue
 #                             myIndex = c("(Red-Blue)/Green","2*Green/Blue"),
 #                             plot = F)
 #   EX1.Info<- fieldInfo(mosaic = EX1.Indices[[c("NGRDI","BGI", "GLI","VARI","myIndex.1","myIndex.2")]],
-#                         fieldShape = plotShape$fieldShape, 
-#                         n.core = 3)
+#                         fieldShape = plotShape$fieldShape 
+#                         #,n.core = 3
+#                         )
 #   DSM0 <- stack(paste("./DSM/",DSM[1],sep = ""))
 #   DSM1 <- stack(paste("./DSM/",DSM[i],sep = ""))
 #   DSM0.Crop <- fieldCrop(mosaic = DSM0,fieldShape = Test.Crop,plot = F)
