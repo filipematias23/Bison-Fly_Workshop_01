@@ -118,11 +118,16 @@ EX.Table.Parallel <- foreach(i = 1:length(pics), .packages = c("raster","FIELDim
 rownames(EX.Table.Parallel)<-pics
 EX.Table.Parallel 
 
+##########################
+### Seeds measurements ###
+##########################
+
 # Taking individual seed measurements (Remove artifacts by changing the parameter *minArea* and observing the values on EX3.D$Dimension$area)
 dev.off()
 EX3.D<-fieldObject(mosaic = EX3.R$mask, 
-                      watershed = T, 
-                      minArea = 100)
+                   watershed = T, 
+                   minArea = 200,
+                   perimeter = T)
 
 # Measurement Output:
 EX3.D$numObjects
@@ -138,21 +143,16 @@ lines(EX3.D$x.position[[1]], col="red", lty=2)
 lines(EX3.D$y.position[[1]], col="red", lty=2)
 
 # Calculating indices per seed:
-EX3.I<- fieldIndex(mosaic = EX3,index = c("SI","BGI","BI"))
-EX3.Data<-fieldInfo(mosaic = EX3.I[[c("SI","BGI","BI")]], fieldShape = EX3.D$Objects, projection = F)
+EX3.I<- fieldIndex(mosaic = EX3,index = c("SI","BGI","BI","VARI"))
+EX3.Data<-fieldInfo(mosaic = EX3.I[[c("SI","BGI","BI","VARI")]], fieldShape = EX3.D$Objects, projection = F)
 EX3.Data$fieldShape@data
 
-# Perimeter:
-# install.packages("spatialEco")
-library(spatialEco)
-perimeter<-polyPerimeter(EX3.D$Objects)
-box<-polyPerimeter(EX3.D$Polygons)
-Data.Obj<-cbind(EX3.Data$fieldShape@data,EX3.D$Dimension,perimeter=perimeter,box=box)
+# Combining the data:
+Data.Obj<-cbind.data.frame(EX3.Data$fieldShape@data,EX3.D$Dimension)
 Data.Obj
 
 # Data visualization: 
-library(reshape2)
-Data.Obj1<-melt(Data.Obj[,c("SI","BGI","BI","area","x.dist","y.dist","perimeter","box")])
+Data.Obj1<-melt(Data.Obj[,c("SI","BGI","BI","VARI","area","x.dist","y.dist","perimeter","box")])
 
 ggplot(Data.Obj1, aes(x=value, fill=variable)) +
   geom_histogram(aes(y=..density..), colour="black")+
@@ -162,5 +162,3 @@ ggplot(Data.Obj1, aes(x=value, fill=variable)) +
 ###########
 ### END ###
 ###########
-
-
