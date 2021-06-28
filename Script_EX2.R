@@ -64,8 +64,7 @@ plot(plotFile$fieldShape, add=T)
 
 ## Extracting data (474 bands):
 EX.HYP.I<- fieldInfo(EX.HYP.S, # EX.HYP.S$newMosaic, 
-                    fieldShape = plotFile$fieldShape,
-                    n.core = 1)
+                    fieldShape = plotFile$fieldShape)
 
 ## Saving the new csv with hyperspectral information per plot:
 DataHYP<- EX.HYP.I$fieldShape@data
