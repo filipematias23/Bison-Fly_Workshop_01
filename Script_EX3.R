@@ -120,7 +120,7 @@ EX.Table.Parallel
 
 # Taking individual seed measurements (Remove artifacts by changing the parameter *minArea* and observing the values on EX3.D$Dimension$area)
 dev.off()
-EX3.D<-fieldObject2(mosaic = EX3.R$mask, 
+EX3.D<-fieldObject(mosaic = EX3.R$mask, 
                       watershed = T, 
                       minArea = 100)
 
