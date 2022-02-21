@@ -26,7 +26,7 @@ library(gridExtra)
 
 ### List of orthomosaics ###
 Field <- list.files("./5band/") # 15 5band orthomosaics
-# Field_RGB <- list.files("./RGB/") # 15 RGB orthomosaics
+Field_RGB <- list.files("./RGB/") # 15 RGB orthomosaics
 Field_DSM <- list.files("./DSM/") # 15 DSM orthomosaics
 
 ######################################################
@@ -34,7 +34,7 @@ Field_DSM <- list.files("./DSM/") # 15 DSM orthomosaics
 ######################################################
 
 ### Suggested strategy of using lids to highlight where to click ###
-Test <- stack(paste("./5band/",Field[3],sep = ""))
+Test <- stack(paste("./5band/",Field[4],sep = ""))
 plotRGB(FIELDimageR:::RGB.rescale(Test,3))
 
 ##########################
