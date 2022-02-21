@@ -503,6 +503,57 @@ corrplot(r$correlation,
          insig = "blank", 
          diag=FALSE)
 
+###############
+### Lodging ###
+###############
+
+### Flight before: 07/19/2021 (73 DAP) ###
+### Flight after_1: 07/20/2021 (74 DAP) ###
+### Flight after_2: 07/26/2021 (80 DAP) ###
+
+### Choosing flights around the Lodging event ###
+DAP<-c(73,74,80)
+Data<-DataTotal[as.numeric(DataTotal$DAP)%in%DAP,]
+
+### Choosing UAV traits to compare with LODG ###
+Data<-Data[,c("DAP","LODG","Height_90")] # Other options: c("CIG","CIRE","Canopy","NGRDI","BGI","GLI","NDVI","NDRE","Height_50","Height_75","Height_90") 
+Data$DAP<-as.factor(Data$DAP)
+
+### Preparing data to make plots ###
+Data.1<-melt(Data,
+             value.name = "Index",
+             measure.vars = c("Height_90"))
+Data.2<-melt(Data.1,
+             value.name = "Trait",
+             measure.vars = c("LODG"))
+colnames(Data.2)<-c("DAP","Index","Index.var","Trait","Trait.var")
+Data.2$DAP<-as.factor(Data.2$DAP)
+Data.2$Index<-as.factor(Data.2$Index)
+Data.2$Trait<-as.factor(Data.2$Trait)
+Data.2$Index.var<-as.numeric(as.character(Data.2$Index.var))
+Data.2$Trait.var<-as.factor(as.character(Data.2$Trait.var))
+
+### Simple boxplot visualization ###
+ggplot(data = Data.2, 
+       aes(y = Index.var,
+           x = Trait.var,
+           fill=Index)) + 
+  facet_grid(DAP~Trait, scales = "free")+
+  geom_boxplot() +
+  labs(y="Estimate Plant Height",
+       x="Lodging (Score)") +
+  scale_fill_grey(start=0.8, end=0.2)+
+  theme_bw()+
+  theme(legend.position = "right",
+        legend.direction = "vertical",
+        legend.text = element_text(color="black",size=18),
+        legend.title = element_blank(),
+        axis.text.y = element_text(color="black",size=10),
+        axis.title = element_text(color="black",size=18),
+        axis.text.x = element_text(color="black",size=10),
+        strip.text = element_text(color="black",size=18),
+        strip.background = element_rect(fill="white")) 
+
 ##########################
 ### Maturity (MAT_DAY) ###
 ##########################
@@ -540,57 +591,6 @@ ggplot(data = Data.2,
   scale_color_grey(start=0.4, end=0.7)+
   labs(y="Maturity (day of the year)",
        x="Index") +
-  theme_bw()+
-  theme(legend.position = "right",
-        legend.direction = "vertical",
-        legend.text = element_text(color="black",size=18),
-        legend.title = element_blank(),
-        axis.text.y = element_text(color="black",size=10),
-        axis.title = element_text(color="black",size=18),
-        axis.text.x = element_text(color="black",size=10),
-        strip.text = element_text(color="black",size=18),
-        strip.background = element_rect(fill="white")) 
-
-###############
-### Lodging ###
-###############
-
-### Flight before: 07/19/2021 (73 DAP) ###
-### Flight after_1: 07/20/2021 (74 DAP) ###
-### Flight after_2: 07/26/2021 (80 DAP) ###
-
-### Choosing flights around the Lodging event ###
-DAP<-c(73,74,80)
-Data<-DataTotal[as.numeric(DataTotal$DAP)%in%DAP,]
-
-### Choosing UAV traits to compare with LODG ###
-Data<-Data[,c("DAP","LODG","Height_90")] # Other options: c("CIG","CIRE","Canopy","NGRDI","BGI","GLI","NDVI","NDRE","Height_50","Height_75","Height_90") 
-Data$DAP<-as.factor(Data$DAP)
-
-### Preparing data to make plots ###
-Data.1<-melt(Data,
-             value.name = "Index",
-             measure.vars = c("Height_90"))
-Data.2<-melt(Data.1,
-             value.name = "Trait",
-             measure.vars = c("LODG"))
-colnames(Data.2)<-c("DAP","Index","Index.var","Trait","Trait.var")
-Data.2$DAP<-as.factor(Data.2$DAP)
-Data.2$Index<-as.factor(Data.2$Index)
-Data.2$Trait<-as.factor(Data.2$Trait)
-Data.2$Index.var<-as.numeric(as.character(Data.2$Index.var))
-Data.2$Trait.var<-as.factor(as.character(Data.2$Trait.var))
-
-### Simple regression visualization ###
-ggplot(data = Data.2, 
-       aes(y = Index.var,
-           x = Trait.var,
-           fill=Index)) + 
-  facet_grid(DAP~Trait, scales = "free")+
-  geom_boxplot() +
-  labs(y="Estimate Plant Height",
-       x="Lodging (Score)") +
-  scale_fill_grey(start=0.8, end=0.2)+
   theme_bw()+
   theme(legend.position = "right",
         legend.direction = "vertical",
