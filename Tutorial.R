@@ -154,6 +154,7 @@ Trait<-c("MAT_DAY","HT","DH","LODG","YLD")
 H2.AG<-NULL
 for(t in 1:length(Trait)){
   Data1<-droplevels(Data[!is.na(Data[,colnames(Data)==Trait[t]]),])
+  # mod<-lmer(eval(parse(text = paste(Trait.UAV[t2]," ~ RANGE+ROW+(1|NAME)",sep=""))),data = Data)
   mod<-lmer(eval(parse(text = paste(Trait[t],"~(1|NAME)",sep=""))),data = Data1)
   Var1<-as.data.frame(VarCorr(mod))$vcov
   names(Var1)<-as.data.frame(VarCorr(mod))$grp
