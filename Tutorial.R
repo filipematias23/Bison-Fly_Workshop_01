@@ -479,7 +479,7 @@ corrplot(r$correlation,
          p.mat = r$pvalue,
          sig.level = 0.05, # Level of significance 5%
          method="color", col=col(200),  
-         type="upper", order="hclust",addCoef.col = "black", 
+         type="upper", order="alphabet",addCoef.col = "black", 
          tl.col="black", tl.srt=45, 
          insig = "blank", 
          diag=FALSE)
@@ -498,7 +498,7 @@ corrplot(r$correlation,
          p.mat = r$pvalue,
          sig.level = 0.1,
          method="color", col=col(200),  
-         type="upper", order="hclust",addCoef.col = "black", 
+         type="upper", order="alphabet",addCoef.col = "black", 
          tl.col="black", tl.srt=45, 
          insig = "blank", 
          diag=FALSE)
