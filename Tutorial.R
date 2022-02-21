@@ -26,7 +26,7 @@ library(gridExtra)
 
 ### List of orthomosaics ###
 Field <- list.files("./5band/") # 15 5band orthomosaics
-Field_RGB <- list.files("./RGB/") # 15 RGB orthomosaics
+# Field_RGB <- list.files("./RGB/") # 15 RGB orthomosaics
 Field_DSM <- list.files("./DSM/") # 15 DSM orthomosaics
 
 ######################################################
