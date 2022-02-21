@@ -43,7 +43,7 @@ plotRGB(FIELDimageR:::RGB.rescale(Test,3))
 
 Data <- read.csv("EX_DATA.csv",header = T,fileEncoding="UTF-8-BOM")
 Map <- read.csv("EX_MAP.csv",header = F,fileEncoding="UTF-8-BOM")
-x11()
+# x11()
 Shapefile <- fieldShape(mosaic = Test,
                         ncols = 11,
                         nrows = 20,
