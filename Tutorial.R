@@ -843,3 +843,7 @@ ggplot(data = Data.SC,
         axis.ticks.x=element_blank(),
         strip.text = element_text(color="black",size=18),
         strip.background = element_rect(fill="white")) 
+
+###########
+### END ###
+###########
