@@ -8,7 +8,7 @@
 
 ## "Bison-Fly pipeline: Phenomics applied to plant breeding"
 
-> Workshop presented at the 2022 NAPPN Annual Conference in Athens, Georgia. In this course, I present step-by-step how we leverage UAV data in our breeding program. This is open source R code that anyone may use and adopt for different crops and situations. The Bison-Fly tutorial is the NDSU Spring Wheat UAV Pipeline developed in partnership with Drone2Phenome (D2P). We hope this pipeline helps you with your research, and all suggestions to improve it are welcome. 
+> In this workshop, I present step-by-step how we leverage UAV data in our breeding program. This is open source R code that anyone may use and adopt for different crops and situations. The Bison-Fly tutorial is the NDSU Spring Wheat UAV Pipeline developed in partnership with Drone2Phenome (D2P). We hope this pipeline helps you with your research, and all suggestions to improve it are welcome. 
 
 <br />
 
