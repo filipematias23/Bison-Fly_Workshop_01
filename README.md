@@ -18,7 +18,7 @@
 
 > Launch the Binder button below to open a virtual RStudio (running this tutorial online):
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/filipematias23/Bison-Fly_Workshop_01.git/main?urlpath=rstudio)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/filipematias23/Bison-Fly_Workshop_01/main?urlpath=rstudio)
 
 <br />
 
